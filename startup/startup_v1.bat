@@ -1,10 +1,11 @@
 #!/bin/bash
+filevpn=$VPN/duc.tran4.ovpn
 sql=sqldeveloper
 chrome=chrome
 screenshot=screenshotun
 
 is_process_existed(){
-	pgrep $1 > /dev/null
+	pgrep -f $1 > /dev/null
 }
 
 #call function is_process_existed with agrument 1
@@ -41,10 +42,10 @@ run_process_if_not_existed $sql sqldeveloper
 run_process_if_not_existed $chrome google-chrome
 run_process_if_not_existed $screenshot
 
-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
+#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
 
 
-#sudo kill $(ps -aux | grep [o]penvpn3-service-config | awk '{print $2}');openvpn3 config-import -c '$filevpn' && openvpn3 configs-list && openvpn3 session-start -#c '$filevpn'
+#sudo kill $(ps -aux | grep [o]penvpn3-service-config | awk '{print #$2}');openvpn3 config-import -c '$filevpn' && openvpn3 configs-list && #openvpn3 session-start -#c '$filevpn'
 
 
 #echo open terminal tab sqldeveloper
@@ -55,4 +56,13 @@ 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
 
 #gnome-terminal --tab-with-profile=hold -t 'openvpn' -e 'sh -c "sudo kill '$(ps -aux | grep [o]penvpn3-service-config | awk '{print $2}')' ; openvpn3 config-import -c '$filevpn' && openvpn3 configs-list && openvpn3 session-start -c '$filevpn'"' 
 
-#echo excute openvpn done
+#if is_process_existed openvpn3-service-config; then
+#	sudo kill -9 $(pgrep -f openvpn3-service-config);
+#else
+#	openvpn3 config-import -c $filevpn
+#fi
+
+# && thực thi được sẽ chạy câu lệnh tiếp theo, ko thực thi được ko chạy tất cả
+# || không quan tâm câu lệnh trước có thực thi được không, sẽ thực thi.
+is_process_existed openvpn3-service-config && echo "delete1" && sudo kill -9 $(pgrep -f openvpn3-service-config) && echo "delete2" && openvpn3 config-import -c $filevpn && echo "import1" || openvpn3 config-import -c $filevpn && echo "import2"
+
