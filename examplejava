@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd /home/duc/workplace/momo/projects/grpc-java/examples
+
+./gradlew installDist
+
+#bật terminal + trỏ đến thư mục làm việc + excute command
+gnome-terminal --tab-with-profile=example-java --working-directory=/home/duc/workplace/momo/projects/grpc-java/examples -e "./build/install/examples/bin/hello-world-server"
+
+#sleep 2 s để server mở lên rồi mới thực thi câu lệnh kế
+sleep 2
+
+gnome-terminal --tab-with-profile=example-java --working-directory=/home/duc/workplace/momo/projects/grpc-java/examples -e "./build/install/examples/bin/hello-world-client"
+
