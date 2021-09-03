@@ -41,7 +41,7 @@ run_process_if_not_existed $sql sqldeveloper
 run_process_if_not_existed $chrome google-chrome
 run_process_if_not_existed $screenshot
 
-
+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
 
 
 #sudo kill $(ps -aux | grep [o]penvpn3-service-config | awk '{print $2}');openvpn3 config-import -c '$filevpn' && openvpn3 configs-list && openvpn3 session-start -#c '$filevpn'
