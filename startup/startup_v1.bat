@@ -24,7 +24,7 @@ echo $1
 #echo "ps -aux | grep $1 | awk '{print \$2}'"
 
 	
-	if_exist $1 && echo "Process $1 already running" || ( [[ ! -z "$2" ]] && nohup $2 || echo "ko có tham số 2" &)
+	if_exist $1 && echo "Process $1 already running" || (nohup $2 &)
 	
 	
 #	if pgrep $1 >/dev/null; then
@@ -38,9 +38,9 @@ echo $1
 
 }
 
-run_process $sql sqldeveloper 
-run_process $chrome google-chrome
-run_process $screenshot
+run_process sqldeveloper 
+run_process google-chrome
+run_process smartgit.sh
 
 #
 
@@ -75,8 +75,10 @@ run_process $screenshot
 #cannot open for read: $VPN/duc.tran4.ovpn
 #openvpn3 config-import -c $filevpn
 #nohup openvpn3 config-import -c $filevpn
-name 
+
 im_cf(){
 	if_exist openvpn3-service-config && echo "cf already im" || (openvpn3 config-import -c $filevpn && echo "imported" && openvpn3 session-start -c $filevpn)
 }
 im_cf 
+
+
