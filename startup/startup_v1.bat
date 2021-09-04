@@ -4,15 +4,15 @@ sql=sqldeveloper
 chrome=chrome
 screenshot=screenshotun
 
-is_process_existed(){
+if_exist(){
 	pgrep -f $1 > /dev/null
 }
 
-#call function is_process_existed with agrument 1
-is_process_existed chrome
-is_process_existed sqldeveloper
+#call function if_exist with agrument 1
+if_exist chrome
+if_exist sqldeveloper
 
-run_process_if_not_existed(){
+run_process(){
 
 echo $1 
 
@@ -24,7 +24,7 @@ echo $1
 #echo "ps -aux | grep $1 | awk '{print \$2}'"
 
 	
-	is_process_existed $1 && echo "Process $1 already running" || ( [[ ! -z "$2" ]] && nohup $2 || echo "ko có tham số 2"& )
+	if_exist $1 && echo "Process $1 already running" || ( [[ ! -z "$2" ]] && nohup $2 || echo "ko có tham số 2" &)
 	
 	
 #	if pgrep $1 >/dev/null; then
@@ -38,9 +38,9 @@ echo $1
 
 }
 
-run_process_if_not_existed $sql sqldeveloper 
-run_process_if_not_existed $chrome google-chrome
-run_process_if_not_existed $screenshot
+run_process $sql sqldeveloper 
+run_process $chrome google-chrome
+run_process $screenshot
 
 #
 
@@ -56,7 +56,7 @@ run_process_if_not_existed $screenshot
 
 #gnome-terminal --tab-with-profile=hold -t 'openvpn' -e 'sh -c "sudo kill '$(ps -aux | grep [o]penvpn3-service-config | awk '{print $2}')' ; openvpn3 config-import -c '$filevpn' && openvpn3 configs-list && openvpn3 session-start -c '$filevpn'"' 
 
-#if is_process_existed openvpn3-service-config; then
+#if if_exist openvpn3-service-config; then
 #	sudo kill -9 $(pgrep -f openvpn3-service-config);
 #else
 #	openvpn3 config-import -c $filevpn
@@ -64,5 +64,19 @@ run_process_if_not_existed $screenshot
 
 # && thực thi được sẽ chạy câu lệnh tiếp theo, ko thực thi được ko chạy tất cả
 # || không quan tâm câu lệnh trước có thực thi được không, sẽ thực thi.
-is_process_existed openvpn3-service-config && echo "delete1" && sudo kill -9 $(pgrep -f openvpn3-service-config) && echo "delete2" && openvpn3 config-import -c $filevpn && echo "import1" || openvpn3 config-import -c $filevpn && echo "import2"
+#if_exist openvpn3-service-config && echo "delete1" && sudo kill -9 $(pgrep -f openvpn3-service-config) && echo "delete2" && openvpn3 config-import -c $filevpn && echo "import1" || openvpn3 config-import -c $filevpn && echo "import2"
 
+#đọc dòng đầu tiên của file và lấy value
+#lấy value từ file, hoặc truyền param từ ngoài vào
+# => param có giá trị là chuỗi String 
+#không thể lấy đường dẫn tương đối v.v
+#param=$(head -n 1 ./$1)
+#echo $param
+#cannot open for read: $VPN/duc.tran4.ovpn
+#openvpn3 config-import -c $filevpn
+#nohup openvpn3 config-import -c $filevpn
+name 
+im_cf(){
+	if_exist openvpn3-service-config && echo "cf already im" || (openvpn3 config-import -c $filevpn && echo "imported" && openvpn3 session-start -c $filevpn)
+}
+im_cf 
