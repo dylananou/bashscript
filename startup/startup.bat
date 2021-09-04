@@ -42,6 +42,7 @@ run_process sqldeveloper
 run_process google-chrome
 run_process smartgit.sh
 run_process intellij-idea-ultimate
+run_process postman
 
 #
 
