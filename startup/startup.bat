@@ -24,7 +24,7 @@ echo $1
 #echo "ps -aux | grep $1 | awk '{print \$2}'"
 
 	
-	if_exist $1 && echo "Process $1 already running" || (nohup $2 &)
+	if_exist $1 && echo "Process $1 already running" || (nohup $1 &)
 	
 	
 #	if pgrep $1 >/dev/null; then
@@ -41,6 +41,7 @@ echo $1
 run_process sqldeveloper 
 run_process google-chrome
 run_process smartgit.sh
+run_process intellij-idea-ultimate
 
 #
 
